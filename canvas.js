@@ -18,6 +18,16 @@ function drawEmptyRectangle(ctx, topLeftCornerX, topLeftCornerY, width, height, 
     ctx.strokeStyle = 'black';
 }
 
+function drawLines(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(200, 200);
+    ctx.lineTo(300, 200);
+    ctx.lineTo(300, 300);
+    ctx.closePath();
+    ctx.stroke();
+    ctx.beginPath();
+}
+
 window.addEventListener('load', () => {
     const canvas = document.querySelector('#canvas');
     const ctx = canvas.getContext('2d');
@@ -32,12 +42,33 @@ window.addEventListener('load', () => {
 
     drawEmptyRectangle(ctx, 100, 50, 300, 60, 1, 'rgba(0, 0, 0, 1)');
 
-    //draw line
-    ctx.beginPath();
-    ctx.moveTo(200, 200);
-    ctx.lineTo(300, 200);
-    ctx.lineTo(300, 300);
-    ctx.closePath();
-    ctx.stroke();
+    drawLines(ctx);
+
+    //variables
+    let painting = false;
+
+
+    function startPosition() {
+        painting = true;
+        console.log(painting);
+    }
+
+    function finishPosition() {
+        painting = false;
+        ctx.beginPath();
+    }
+
+    function draw(e) {
+        if(!painting) return;
+        ctx.lineWidth = 10;
+        ctx.lineCap = 'round';
+
+        ctx.lineTo(e.clientX, e.clientY);
+        ctx.stroke();
+    }
+    //EventListeners
+    canvas.addEventListener('mousedown', startPosition);
+    canvas.addEventListener('mouseup', finishPosition);
+    canvas.addEventListener('mousemove', draw);
 });
 
