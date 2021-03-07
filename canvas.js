@@ -13,6 +13,7 @@ function drawFullRectangle(ctx, topLeftCornerX, topLeftCornerY, width, height, c
 
 function drawEmptyRectangle(ctx, topLeftCornerX, topLeftCornerY, width, height, lineWidth, color) {
     ctx.strokeStyle = color;
+    ctx.lineWidth = lineWidth;
     ctx.strokeRect(topLeftCornerX, topLeftCornerY, width, height);
     ctx.strokeStyle = 'black';
 }
