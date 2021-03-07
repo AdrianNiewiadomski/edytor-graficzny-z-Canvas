@@ -31,5 +31,13 @@ window.addEventListener('load', () => {
     drawFullRectangle(ctx, 160, 90, 240, 10, 'rgb(255, 0, 0)');
 
     drawEmptyRectangle(ctx, 100, 50, 300, 60, 1, 'rgba(0, 0, 0, 1)');
+
+    //draw line
+    ctx.beginPath();
+    ctx.moveTo(200, 200);
+    ctx.lineTo(300, 200);
+    ctx.lineTo(300, 300);
+    ctx.closePath();
+    ctx.stroke();
 });
 
