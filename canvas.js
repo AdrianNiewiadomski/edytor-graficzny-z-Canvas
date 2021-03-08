@@ -33,7 +33,10 @@ window.addEventListener('load', () => {
     const ctx = canvas.getContext('2d');
 
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+
+    // Erases everything that is on canvas when resize. 
+    // TODO: fix this!
+    // window.addEventListener('resize', resizeCanvas);
 
     drawFullRectangle(ctx, 100, 50, 60, 60, 'blue');
     drawFullRectangle(ctx, 160, 50, 240, 10, '#f00');
@@ -45,26 +48,37 @@ window.addEventListener('load', () => {
     drawLines(ctx);
 
     //variables
-    let painting = false;
+    let drawing = false;
 
 
-    function startPosition() {
-        painting = true;
-        console.log(painting);
+    function startPosition(e) {
+        drawing = true;
+        
+        // should draw points. TODO: fix this!
+        draw(e); 
+        ctx.stroke();
     }
 
     function finishPosition() {
-        painting = false;
-        ctx.beginPath();
+        drawing = false;
+
+        // This has to be added so the separate drawings are not connected by line.
+        ctx.beginPath(); 
     }
 
     function draw(e) {
-        if(!painting) return;
+        if(!drawing) return;
         ctx.lineWidth = 10;
         ctx.lineCap = 'round';
+        ctx.strokeStyle = 'red';
 
         ctx.lineTo(e.clientX, e.clientY);
         ctx.stroke();
+
+        // This has been initially added so the separate drawings are not connected by line. Also it makes lines more smooth
+        ctx.beginPath(); 
+        // makes lines more smooth
+        ctx.moveTo(e.clientX, e.clientY); 
     }
     //EventListeners
     canvas.addEventListener('mousedown', startPosition);
