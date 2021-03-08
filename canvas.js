@@ -55,8 +55,7 @@ window.addEventListener('load', () => {
         drawing = true;
         
         // should draw points. TODO: fix this!
-        draw(e); 
-        ctx.stroke();
+        draw(e);
     }
 
     function finishPosition() {
